@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Maintenance</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #007BFF;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <br><br><br>
+    <form action="delete_maintenance_data/{{ to_be_delete.id }}" method="post">
+        {% csrf_token %}
+        <label for="plate_no">Plate Number</label><br>
+        <select name="plate_no">
+            <option value="{{ to_be_delete.PlateNo }}" selected>{{ to_be_delete.PlateNo }}</option>
+        </select><br>
+        <h3>Description</h3><br>
+        <textarea name="description" rows="4" cols="50" required>{{ to_be_delete.Description }}</textarea><br>
+        <h3>Last Maintenance Date</h3><br>
+        <input type="date" name="last_service" value="{{ to_be_delete.LastMaintenance }}"><br>
+        <h3>Next Maintenance Date</h3><br>
+        <input type="date" name="next_service" value="{{ to_be_delete.NextMaintenance }}"><br>
+        <br>
+        <input type="submit" value="DELETE">
+    </form>
+
+    <a href="{% url 'homepage' %}">Back to Homepage</a>
+</body>
+</html>
